@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in - NovaBank</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+    <main class="login-card">
+        <a class="login-brand" href="/" aria-label="NovaBank home">
+            <span class="logo-icon">N</span>
+            <span>
+                <strong>NovaBank</strong>
+                <small>Digital Banking</small>
+            </span>
+        </a>
+
+        <h1 id="loginTitle">Welcome back</h1>
+        <p class="login-subtitle" id="loginSubtitle">Sign in to securely access your account.</p>
+
+        <form id="loginForm">
+            <div id="signupNameField" hidden>
+                <label for="signupName">Your name</label>
+                <input id="signupName" name="name" type="text" autocomplete="name" maxlength="100">
+            </div>
+
+            <label for="loginEmail">Email</label>
+            <input id="loginEmail" name="email" type="email" autocomplete="email" required>
+
+            <label for="loginPassword">Password</label>
+            <input id="loginPassword" name="password" type="password" autocomplete="current-password" minlength="6" required>
+
+            <button class="primary-btn" id="loginSubmit" type="submit" disabled>Sign in</button>
+            <p class="login-error" id="loginMessage" role="status" aria-live="polite"></p>
+            <a
+                class="firebase-settings-link"
+                id="firebaseSettingsLink"
+                href="https://console.firebase.google.com/project/banking-system-d03ca/authentication/providers"
+                target="_blank"
+                rel="noopener noreferrer"
+                hidden
+            >Open Firebase Authentication settings</a>
+        </form>
+
+        <button class="auth-toggle" id="forgotPassword" type="button">Forgot password?</button>
+        <button class="auth-toggle" id="authModeToggle" type="button">Create a new account</button>
+        <p class="login-setup" id="loginSetup" hidden>
+            Enable Email/Password in Firebase Authentication, create the
+            Firestore database, and publish the access rules from
+            <code>firestore.rules</code>.
+        </p>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>

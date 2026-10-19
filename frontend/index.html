@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NovaBank - Banking System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <div class="logo-icon">N</div>
+                <div>
+                    <h2>NovaBank</h2>
+                    <span>Digital Banking</span>
+                </div>
+            </div>
+
+            <nav>
+                <a href="#" class="nav-link active" onclick="showSection('dashboard')">
+                    <span>⌂</span>
+                    Dashboard
+                </a>
+
+                <a href="#" class="nav-link" onclick="showSection('transactions')">
+                    <span>↕</span>
+                    Transactions
+                </a>
+
+                <a href="#" class="nav-link" onclick="showSection('account')">
+                    <span>◉</span>
+                    My Account
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <div class="demo-badge">
+                    <span class="status-dot"></span>
+                    <span id="currentEmail">Signed out</span>
+                </div>
+
+                <button class="logout-btn signout-btn" onclick="signOut()">Sign out</button>
+                <button class="logout-btn reset-btn" onclick="resetBank()">
+                    ↪ Reset Demo
+                </button>
+            </div>
+
+        </aside>
+
+
+        <!-- Main Content -->
+        <main class="main">
+
+            <!-- Top Header -->
+            <header class="topbar">
+
+                <div>
+                    <p class="welcome-small">Welcome back,</p>
+                    <h1 id="welcomeName">Guest</h1>
+                </div>
+
+                <div class="profile">
+                    <div class="notification">🔔</div>
+
+                    <div class="avatar" id="profileAvatar">
+                        G
+                    </div>
+                </div>
+
+            </header>
+
+
+            <!-- DASHBOARD -->
+            <section id="dashboard" class="section active-section">
+
+                <!-- Balance Card -->
+                <div class="balance-card">
+
+                    <div class="balance-left">
+
+                        <div class="balance-top">
+                            <span>Total Balance</span>
+                            <span class="verified">● Active Account</span>
+                        </div>
+
+                        <h2 id="balance">
+                            ₹0.00
+                        </h2>
+
+                        <p>
+                            Available balance
+                        </p>
+
+                        <div class="account-number">
+                            Account •••• <span id="lastFour">0000</span>
+                        </div>
+
+                    </div>
+
+                    <div class="balance-symbol">
+                        ₹
+                    </div>
+
+                </div>
+
+
+                <!-- Quick Actions -->
+                <div class="section-title">
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Manage your money easily</p>
+                    </div>
+                </div>
+
+                <div class="actions">
+
+                    <button class="action-card deposit-action"
+                            onclick="openTransaction('deposit')">
+
+                        <div class="action-icon">↓</div>
+
+                        <div>
+                            <h3>Deposit</h3>
+                            <p>Add money to account</p>
+                        </div>
+
+                        <span class="arrow">→</span>
+
+                    </button>
+
+
+                    <button class="action-card withdraw-action"
+                            onclick="openTransaction('withdraw')">
+
+                        <div class="action-icon">↑</div>
+
+                        <div>
+                            <h3>Withdraw</h3>
+                            <p>Withdraw money</p>
+                        </div>
+
+                        <span class="arrow">→</span>
+
+                    </button>
+
+
+                    <button class="action-card"
+                            onclick="showSection('transactions')">
+
+                        <div class="action-icon">↕</div>
+
+                        <div>
+                            <h3>Transactions</h3>
+                            <p>View transaction history</p>
+                        </div>
+
+                        <span class="arrow">→</span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- Lower Dashboard -->
+                <div class="dashboard-grid">
+
+                    <!-- Recent Transactions -->
+                    <div class="card transactions-card">
+
+                        <div class="card-header">
+                            <div>
+                                <h2>Recent Transactions</h2>
+                                <p>Your latest account activity</p>
+                            </div>
+
+                            <button onclick="showSection('transactions')">
+                                View All
+                            </button>
+                        </div>
+
+                        <div id="recentTransactions">
+                            <div class="empty-state">
+                                <div>↕</div>
+                                <p>No transactions yet</p>
+                                <span>Your transactions will appear here.</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Account Summary -->
+                    <div class="card account-summary">
+
+                        <div class="card-header">
+                            <div>
+                                <h2>Account Summary</h2>
+                                <p>Your account information</p>
+                            </div>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Account Holder</span>
+                            <strong id="summaryName">Guest</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Account Number</span>
+                            <strong id="summaryAccount">Not created</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Account Status</span>
+                            <strong class="active-text">Active</strong>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Total Transactions</span>
+                            <strong id="transactionCount">0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- TRANSACTIONS SECTION -->
+            <section id="transactions" class="section">
+
+                <div class="page-heading">
+                    <h2>Transactions</h2>
+                    <p>Complete history of your banking activity</p>
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <div>
+                            <h2>Transaction History</h2>
+                            <p>All deposits and withdrawals</p>
+                        </div>
+                    </div>
+
+                    <div id="allTransactions">
+
+                        <div class="empty-state">
+                            <div>↕</div>
+                            <p>No transactions yet</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ACCOUNT SECTION -->
+            <section id="account" class="section">
+
+                <div class="page-heading">
+                    <h2>My Account</h2>
+                    <p>Manage your account information</p>
+                </div>
+
+
+                <div class="card account-page">
+
+                    <div class="account-profile">
+
+                        <div class="large-avatar" id="accountAvatar">
+                            G
+                        </div>
+
+                        <div>
+                            <h2 id="accountName">Guest</h2>
+                            <p>NovaBank Customer</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="details-grid">
+
+                        <div class="detail">
+                            <span>Full Name</span>
+                            <strong id="detailName">Not available</strong>
+                        </div>
+
+                        <div class="detail">
+                            <span>Email</span>
+                            <strong id="detailEmail">Not available</strong>
+                        </div>
+
+                        <div class="detail">
+                            <span>Account Number</span>
+                            <strong id="detailAccount">Not available</strong>
+                        </div>
+
+                        <div class="detail">
+                            <span>Current Balance</span>
+                            <strong id="detailBalance">₹0.00</strong>
+                        </div>
+
+                        <div class="detail">
+                            <span>Account Status</span>
+                            <strong class="active-text">Active</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- Transaction Modal -->
+    <div class="modal-overlay" id="transactionModal">
+
+        <div class="modal">
+
+            <button class="close-btn" onclick="closeTransaction()">
+                ×
+            </button>
+
+            <div class="modal-icon" id="modalIcon">
+                ↓
+            </div>
+
+            <h2 id="modalTitle">Deposit Money</h2>
+
+            <p id="modalDescription">
+                Add money to your bank account.
+            </p>
+
+            <label>Enter Amount</label>
+
+            <div class="amount-input">
+                <span>₹</span>
+
+                <input
+                    type="number"
+                    id="amount"
+                    placeholder="0.00"
+                    min="1"
+                >
+            </div>
+
+            <button class="primary-btn" onclick="performTransaction()">
+                Confirm Transaction
+            </button>
+
+            <p class="modal-message" id="modalMessage"></p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Account Creation Modal -->
+    <div class="modal-overlay" id="accountModal">
+
+        <div class="modal">
+
+            <div class="modal-icon">
+                N
+            </div>
+
+            <h2>Welcome to NovaBank</h2>
+
+            <p>
+                Create your demo bank account to get started.
+            </p>
+
+            <label for="nameInput">Your Name</label>
+
+            <input
+                type="text"
+                id="nameInput"
+                autocomplete="name"
+                readonly
+            >
+
+            <label for="accountInput">Assigned Account Number</label>
+
+            <input
+                type="text"
+                id="accountInput"
+                readonly
+            >
+
+            <label>Initial Balance</label>
+
+            <div class="amount-input">
+                <span>₹</span>
+
+                <input
+                    type="number"
+                    id="initialBalance"
+                    placeholder="0.00"
+                    min="0"
+                >
+            </div>
+
+            <button class="primary-btn" onclick="createAccount()">
+                Create Account
+            </button>
+
+            <p class="modal-message" id="accountMessage"></p>
+            <a
+                class="firebase-settings-link"
+                id="firestoreSetupLink"
+                href="https://console.cloud.google.com/datastore/setup?project=banking-system-d03ca"
+                target="_blank"
+                rel="noopener noreferrer"
+                hidden
+            >Create the Firestore database</a>
+
+        </div>
+
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="firebase-init.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
