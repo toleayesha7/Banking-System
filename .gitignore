@@ -1,0 +1,3 @@
+data/
+service-account*.json
+*-firebase-adminsdk-*.json
